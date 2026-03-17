@@ -1,0 +1,18 @@
+name = "my-travel-iq"
+main = "src/index.js"
+compatibility_date = "2025-04-01"
+
+[assets]
+directory = "./public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "my-travel-iq-db"
+database_id = "915da9ac-f1b5-46e0-8827-7c7f82473a53"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "my-travel-iq-uploads"
+
+[ai]
+binding = "AI"

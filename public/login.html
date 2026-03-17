@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — My Travel IQ</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('/images/login-bg.jpg') center/cover no-repeat;
+    }
+    .login-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+      text-align: center;
+      max-width: 380px;
+      width: 100%;
+      margin: 1rem;
+    }
+    .login-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+    .login-tagline {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+    .google-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      font-family: 'Outfit', system-ui, sans-serif;
+    }
+    .google-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(34,197,94,0.15);
+    }
+    .google-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+    .login-error {
+      background: rgba(239,68,68,0.1);
+      color: var(--danger);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    .login-footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-logo">My Travel IQ</div>
+      <div class="login-tagline">Your smart travel companion</div>
+
+      <div id="errorMsg" style="display:none" class="login-error"></div>
+
+      <a id="googleBtn" class="google-btn" href="/api/auth/google">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Sign in with Google
+      </a>
+
+      <div class="login-footer">
+        Plan trips, share itineraries, collaborate with friends.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Show error if redirected back with error
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+    if (error) {
+      const msgs = {
+        access_denied: 'Access was denied. Please try again.',
+        state_mismatch: 'Security check failed. Please try again.',
+        state_expired: 'Login timed out. Please try again.',
+        token_exchange: 'Login failed. Please try again.',
+        userinfo_failed: 'Could not get your profile. Please try again.',
+        missing_params: 'Login was incomplete. Please try again.',
+        state_tampered: 'Security check failed. Please try again.',
+        invalid_state: 'Security check failed. Please try again.'
+      };
+      const errorEl = document.getElementById('errorMsg');
+      errorEl.textContent = msgs[error] || 'Something went wrong. Please try again.';
+      errorEl.style.display = 'block';
+    }
+
+    // Build Google auth URL with optional link_token and return_to
+    const btn = document.getElementById('googleBtn');
+    const authParams = new URLSearchParams();
+    const existingToken = localStorage.getItem('tiq_token');
+    if (existingToken) {
+      authParams.set('link_token', existingToken);
+    }
+    const returnTo = params.get('return_to');
+    if (returnTo) {
+      authParams.set('return_to', returnTo);
+    }
+    const qs = authParams.toString();
+    if (qs) {
+      btn.href = `/api/auth/google?${qs}`;
+    }
+  </script>
+</body>
+</html>

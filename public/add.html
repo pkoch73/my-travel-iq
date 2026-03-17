@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Booking — My Travel IQ</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="header">
+    <a href="/"><h1>My Travel IQ</h1></a>
+    <div class="header-actions">
+      <a class="btn btn-secondary btn-sm" id="backBtn" href="/">Back to Trip</a>
+    </div>
+  </div>
+  <div class="container">
+    <h2 style="margin:1rem 0">Add Booking</h2>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="screenshot">Screenshot</button>
+      <button class="tab" data-tab="text">Paste Text</button>
+      <button class="tab" data-tab="pdf">Upload PDF</button>
+    </div>
+
+    <div class="tab-content active" id="tab-screenshot">
+      <div class="screenshot-dropzone" id="screenshotDropzone">
+        <div class="screenshot-prompt">
+          <div class="screenshot-prompt-icon">&#128247;</div>
+          <p class="screenshot-prompt-title">Drop or paste a screenshot</p>
+          <p class="screenshot-prompt-hint">Click to browse, drag & drop, or paste (Ctrl/Cmd+V)</p>
+        </div>
+        <input type="file" id="screenshotFile" accept="image/*" style="display:none">
+      </div>
+      <div class="screenshot-preview" id="screenshotPreview" style="display:none">
+        <img id="screenshotImg" alt="Screenshot preview">
+        <button class="btn btn-secondary btn-sm" id="clearScreenshotBtn">Clear</button>
+      </div>
+      <button class="btn btn-primary" id="extractScreenshotBtn" disabled>Extract Booking Details</button>
+    </div>
+
+    <div class="tab-content" id="tab-text">
+      <div class="form-group">
+        <label>Paste booking confirmation</label>
+        <textarea id="bookingText" rows="8" placeholder="Paste your booking confirmation email, SMS, or any text here... Works in any language."></textarea>
+      </div>
+      <button class="btn btn-primary" id="extractTextBtn">Extract Booking Details</button>
+    </div>
+
+    <div class="tab-content" id="tab-pdf">
+      <div class="form-group">
+        <label>Upload PDF</label>
+        <input type="file" id="pdfFile" accept=".pdf" multiple>
+      </div>
+      <button class="btn btn-primary" id="extractPdfBtn">Upload & Extract</button>
+    </div>
+
+    <div id="extractionStatus" style="display:none">
+      <div class="loading"><span class="spinner"></span> Extracting booking details with AI...</div>
+    </div>
+
+    <div id="extractionResults" style="display:none">
+      <h3 style="margin:1.5rem 0 0.75rem">Extracted Bookings — Review & Confirm</h3>
+      <div id="resultCards"></div>
+      <div style="margin-top:1rem;display:flex;gap:0.5rem">
+        <button class="btn btn-primary" id="confirmAllBtn">Save All Bookings</button>
+        <button class="btn btn-secondary" id="discardBtn">Discard</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/add.js"></script>
+</body>
+</html>

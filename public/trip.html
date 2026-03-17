@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trip — My Travel IQ</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="header">
+    <a href="/"><h1>My Travel IQ</h1></a>
+    <div class="header-actions">
+      <button class="btn btn-secondary btn-sm" id="membersBtn">Members</button>
+      <button class="btn btn-secondary btn-sm" id="shareBtn">Share</button>
+      <button class="btn btn-secondary btn-sm" id="editTripBtn">Edit</button>
+      <button class="btn btn-danger btn-sm" id="deleteTripBtn" style="display:none">Delete</button>
+    </div>
+  </div>
+  <div class="container">
+    <div id="tripHeader"></div>
+    <div id="timeline">
+      <div class="loading"><span class="spinner"></span> Loading...</div>
+    </div>
+  </div>
+  <a class="fab" id="addFab" href="#">+</a>
+
+  <!-- Edit Trip Modal -->
+  <div class="modal-overlay" id="editTripModal" style="display:none">
+    <div class="modal">
+      <h2>Edit Trip</h2>
+      <div class="form-group">
+        <label>Trip Name</label>
+        <input type="text" id="editTripName">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="editTripDesc" rows="2"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="document.getElementById('editTripModal').style.display='none'">Cancel</button>
+        <button class="btn btn-primary" id="saveTripBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share Modal -->
+  <div class="modal-overlay" id="shareModal" style="display:none">
+    <div class="modal">
+      <h2>Share Trip</h2>
+      <div id="shareContent"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="document.getElementById('shareModal').style.display='none'">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Segment Modal -->
+  <div class="modal-overlay" id="editSegModal" style="display:none">
+    <div class="modal" style="max-width:600px">
+      <h2>Edit Booking</h2>
+      <input type="hidden" id="editSegId">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Type</label>
+          <select id="editSegType"></select>
+        </div>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" id="editSegTitle">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Start</label>
+          <input type="datetime-local" id="editSegStart">
+        </div>
+        <div class="form-group">
+          <label>End</label>
+          <input type="datetime-local" id="editSegEnd">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>From</label>
+          <input type="text" id="editSegStartLoc">
+        </div>
+        <div class="form-group">
+          <label>To</label>
+          <input type="text" id="editSegEndLoc">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Confirmation #</label>
+          <input type="text" id="editSegConf">
+        </div>
+        <div class="form-group">
+          <label>Provider</label>
+          <input type="text" id="editSegProvider">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <input type="text" id="editSegNotes">
+      </div>
+      <div class="form-group">
+        <label>Members</label>
+        <div class="traveler-checks" id="editSegMembers"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="cancelEditSegBtn">Cancel</button>
+        <button class="btn btn-primary" id="saveEditSegBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Members Modal -->
+  <div class="modal-overlay" id="membersModal" style="display:none">
+    <div class="modal">
+      <h2>Trip Members</h2>
+      <div id="membersContent"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="document.getElementById('membersModal').style.display='none'">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/trip.js"></script>
+</body>
+</html>
