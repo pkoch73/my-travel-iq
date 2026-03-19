@@ -1,6 +1,6 @@
 # My Travel IQ
 
-A personal travel-itinerary manager that lives entirely on Cloudflare's free tier. Paste a confirmation email, drop in a PDF, or type details manually — the app uses AI to parse the booking and adds it to a structured, shareable trip timeline.
+A personal travel-itinerary manager that lives entirely on Cloudflare's free tier. Paste a confirmation email, drop in a PDF, upload a screenshot, or type details manually — the app uses AI to parse the booking and adds it to a structured, shareable trip timeline.
 
 **Live app:** https://my-travel-iq.philipp-koch.workers.dev
 
@@ -16,7 +16,7 @@ A personal travel-itinerary manager that lives entirely on Cloudflare's free tie
 
 ## Features
 
-- **AI-powered import** — paste raw booking emails or upload PDFs; Cloudflare Workers AI (Llama 3) extracts flights, hotels, car rentals, trains, restaurants, and more
+- **AI-powered import** — paste raw booking emails, upload PDFs, or drop in screenshots; Cloudflare Workers AI (Llama 3) extracts flights, hotels, car rentals, trains, restaurants, and more
 - **Trip timeline** — chronological itinerary with per-segment icons, confirmation numbers, and provider details
 - **World map** — interactive Leaflet map on the dashboard showing pinned destinations across all trips
 - **Traveler management** — assign colour-coded traveler profiles to individual segments
