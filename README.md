@@ -6,6 +6,14 @@ A personal travel-itinerary manager that lives entirely on Cloudflare's free tie
 
 ---
 
+## Screenshots
+
+| Login | Dashboard | Trip Timeline |
+|---|---|---|
+| ![Login screen](docs/screenshots/login.png) | ![Dashboard with map](docs/screenshots/dashboard.png) | ![Trip timeline](docs/screenshots/trip-detail.png) |
+
+---
+
 ## Features
 
 - **AI-powered import** — paste raw booking emails or upload PDFs; Cloudflare Workers AI (Llama 3) extracts flights, hotels, car rentals, trains, restaurants, and more
